@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="PostgreSQL JDBC Driver">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/BancoGM/lib/jdbc/postgresql-42.6.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
