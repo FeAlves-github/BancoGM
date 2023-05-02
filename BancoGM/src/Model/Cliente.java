@@ -1,12 +1,10 @@
 package Model;
 
-import java.util.Date;
-
 public class Cliente {
-    
+
     private String nome;
     private String cpf;
-    private Date dta_nasc;
+    private String dta_nasc;
 
     public String getNome() {
         return nome;
@@ -20,13 +18,13 @@ public class Cliente {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    public Date getDta_nasc() {
+    public String getDta_nasc() {
         return dta_nasc;
     }
-    public void setDta_nasc(Date dta_nasc) {
+    public void setDta_nasc(String dta_nasc) {
         this.dta_nasc = dta_nasc;
     }
 
-    
+
 
 }

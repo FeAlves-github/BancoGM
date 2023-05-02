@@ -1,18 +1,16 @@
 package Model;
 
-import java.sql.Date;
-
 public class ContaComum {
 
     private Cliente cliente;
-    private Date dta_abertura;
+    private String dta_abertura;
     private Double saldo;
     private Double limite_valor_transacao;
 
-    public Date getDta_abertura() {
+    public String getDta_abertura() {
         return dta_abertura;
     }
-    public void setDta_abertura(Date dta_abertura) {
+    public void setDta_abertura(String dta_abertura) {
         this.dta_abertura = dta_abertura;
     }
     public Double getSaldo() {

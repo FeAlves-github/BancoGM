@@ -1,4 +1,5 @@
 import Controller.ClienteController;
+import Controller.ContaController;
 
 import java.text.ParseException;
 import java.util.Scanner;
@@ -26,19 +27,39 @@ public class BancoGM {
                 String nome = ler.next();
                 System.out.println("CPF:");
                 String cpf = ler.next();
-                //System.out.println("Data de Nascimento:");
+                System.out.println("Data de Nascimento:");
+                String data_nasc = ler.next();
                 //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 //Date data_nasc = sdf.parse(ler.nextLine());
 
                 var cliente = new ClienteController();
-                cliente.CadastraCliente(nome, cpf);
+                cliente.CadastraCliente(nome, cpf, data_nasc);
             }
             case 2 -> {
+                System.out.println("Qual tipo de conta deseja cadastrar?");
                 System.out.println("1. Conta Comum");
                 System.out.println("2. Conta Especial");
                 System.out.println("3. Conta Poupança");
-                Integer conta = ler.nextInt();
-                System.out.println(conta);
+                Integer opConta = ler.nextInt();
+                System.out.println(opConta);
+
+                if (opConta==1){
+                    System.out.println("Preencha os dados abaixo:");
+                    System.out.println("Data de abertura da conta:");
+                    String dta_abertura = ler.next();
+                    System.out.println("Saldo inicial:");
+                    Double saldo = ler.nextDouble();
+                    System.out.println("Limite por transação:");
+                    Double limite = ler.nextDouble();
+
+                    var contaComum = new ContaController();
+                    contaComum.CadastraConta(dta_abertura, saldo, limite);
+
+                } if (opConta==2){
+
+                } if (opConta==3){
+
+                }
             }
             case 3 -> {
 
