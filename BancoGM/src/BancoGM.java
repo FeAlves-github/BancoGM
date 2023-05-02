@@ -44,6 +44,8 @@ public class BancoGM {
                 System.out.println(opConta);
 
                 if (opConta==1){
+
+                    System.out.println("--CONTA COMUM--");
                     System.out.println("Preencha os dados abaixo:");
                     System.out.println("Data de abertura da conta:");
                     String dta_abertura = ler.next();
@@ -52,12 +54,36 @@ public class BancoGM {
                     System.out.println("Limite por transação:");
                     Double limite = ler.nextDouble();
 
-                    var contaComum = new ContaController();
-                    contaComum.CadastraConta(dta_abertura, saldo, limite);
+                    var conta = new ContaController();
+                    conta.CadastraContaComum(dta_abertura, saldo, limite);
 
                 } if (opConta==2){
 
+                    System.out.println("--CONTA ESPECIAL--");
+                    System.out.println("Preencha os dados abaixo:");
+                    System.out.println("Data de abertura da conta:");
+                    String dta_abertura = ler.next();
+                    System.out.println("Saldo inicial:");
+                    Double saldo = ler.nextDouble();
+                    System.out.println("Limite por transação:");
+                    Double limite = ler.nextDouble();
+
+                    var conta = new ContaController();
+                    conta.CadastraContaComum(dta_abertura, saldo, limite);
+
                 } if (opConta==3){
+
+                    System.out.println("--CONTA POUPANÇA--");
+                    System.out.println("Preencha os dados abaixo:");
+                    System.out.println("Data de abertura da conta:");
+                    String dta_abertura = ler.next();
+                    System.out.println("Saldo inicial:");
+                    Double saldo = ler.nextDouble();
+                    System.out.println("Limite por transação:");
+                    Double limite = ler.nextDouble();
+
+                    var conta = new ContaController();
+                    conta.CadastraContaPoupanca(dta_abertura, saldo, limite);
 
                 }
             }
