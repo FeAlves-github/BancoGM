@@ -4,7 +4,7 @@ import Utilitarios.Utils;
 
 public class ContaComum {
 
-    private static int contadorDeConta = 1;
+    public static int contadorDeConta = 0;
     private int numeroConta;
     private Cliente cliente;
     private String dta_abertura;
@@ -12,12 +12,23 @@ public class ContaComum {
     private Double limite_valor_transacao;
 
     public ContaComum(Cliente cliente, String dta_abertura, Double limite_valor_transacao) {
+        this.contadorDeConta +=1;
         this.numeroConta = ContaComum.contadorDeConta;
         this.cliente = cliente;
         this.updateSaldo();
         this.dta_abertura = dta_abertura;
         this.limite_valor_transacao = limite_valor_transacao;
-        contadorDeConta +=1;
+    }
+
+    public ContaComum() {
+    }
+
+    public int getContadorDeConta() {
+        return contadorDeConta;
+    }
+
+    public void setContadorDeConta(int contadorDeConta) {
+        this.contadorDeConta = contadorDeConta;
     }
 
     public int getNumeroConta() {
@@ -58,6 +69,10 @@ public class ContaComum {
 
     public void setLimite_valor_transacao(Double limite_valor_transacao) {
         this.limite_valor_transacao = limite_valor_transacao;
+    }
+
+    void updateSaldo() {
+        this.saldo = this.getSaldo();
     }
 
     public String toString() {
