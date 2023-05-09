@@ -68,12 +68,12 @@ public class BancoGM {
 
                 }
                 if (opContaRemetente == 2){
-                    ContaEspecial contaDestinatario = encontrarContaEspecial(numeroContaRemetente);
-                    //transferirContaEspecial(contaRemetente);
+                    ContaEspecial contaRemetente = encontrarContaEspecial(numeroContaRemetente);
+                    transferirContaEspecial(contaRemetente);
                 }
                 if (opContaRemetente == 3){
-                    ContaPoupanca contaDestinatario = encontrarContaPoupanca(numeroContaRemetente);
-                    //transferirContaPoupanca(contaRemetente);
+                    ContaPoupanca contaRemetente = encontrarContaPoupanca(numeroContaRemetente);
+                    transferirContaPoupanca(contaRemetente);
                 }
                 break;
             }
@@ -114,7 +114,7 @@ public class BancoGM {
         Cliente cliente = new Cliente(nome, cpf, data_nasc);
 
         if (opConta == 1){
-            ContaComum contaComum = new ContaComum(cliente, dta_abertura, limite);
+            ContaComum contaComum = new ContaComum(cliente, dta_abertura, limite, opConta);
             contasComum.add(contaComum);
             System.out.println("Conta criada com sucesso!");
             operacoes();
@@ -122,7 +122,7 @@ public class BancoGM {
         } if (opConta == 2){
             System.out.println("Limite de crédito:");
             Double limiteCredito = ler.nextDouble();
-            ContaEspecial contaEspecial = new ContaEspecial(cliente, dta_abertura, limite, limiteCredito);
+            ContaEspecial contaEspecial = new ContaEspecial(cliente, dta_abertura, limite, limiteCredito, opConta);
             contasEspeciais.add(contaEspecial);
             System.out.println("Conta criada com sucesso!");
             operacoes();
@@ -130,7 +130,7 @@ public class BancoGM {
         } if (opConta == 3){
             System.out.println("Digite o dia de hoje (0-31):");
             Integer diaHoje = ler.nextInt();
-            ContaPoupanca contaPoupanca = new ContaPoupanca(cliente, dta_abertura, limite, diaHoje);
+            ContaPoupanca contaPoupanca = new ContaPoupanca(cliente, dta_abertura, limite, diaHoje, opConta);
             contasPoupancas.add(contaPoupanca);
             System.out.println("Conta criada com sucesso!");
             operacoes();
@@ -303,7 +303,67 @@ public class BancoGM {
             ContaPoupanca contaDestinatario = encontrarContaPoupanca(numeroContaDestinatario);
             contaRemetente.transferir(contaDestinatario, valor);
         }
+        operacoes();
+    }
 
+    public static void transferirContaEspecial(ContaEspecial contaRemetente){
+
+        System.out.println("----- Qual o tipo da conta do DESTINATÁRIO para a transferência? -----");
+        System.out.println("1. Conta Comum");
+        System.out.println("2. Conta Especial");
+        System.out.println("3. Conta Poupança");
+        Integer opContaDestinatario = ler.nextInt();
+
+        System.out.println("Número da conta do DESTINATÁRIO: ");
+        int numeroContaDestinatario = ler.nextInt();
+
+        System.out.println("Valor da transferência: ");
+        Double valor = ler.nextDouble();
+
+        if (opContaDestinatario == 1) {
+            ContaComum contaDestinatario = encontrarContaComum(numeroContaDestinatario);
+            contaRemetente.transferirContaEspecial(contaDestinatario, valor);
+
+        }
+        if (opContaDestinatario == 2){
+            ContaEspecial contaDestinatario = encontrarContaEspecial(numeroContaDestinatario);
+            contaRemetente.transferir(contaDestinatario, valor);
+        }
+        if (opContaDestinatario == 3){
+            ContaPoupanca contaDestinatario = encontrarContaPoupanca(numeroContaDestinatario);
+            contaRemetente.transferir(contaDestinatario, valor);
+        }
+        operacoes();
+    }
+
+    public static void transferirContaPoupanca(ContaPoupanca contaRemetente){
+
+        System.out.println("----- Qual o tipo da conta do DESTINATÁRIO para a transferência? -----");
+        System.out.println("1. Conta Comum");
+        System.out.println("2. Conta Especial");
+        System.out.println("3. Conta Poupança");
+        Integer opContaDestinatario = ler.nextInt();
+
+        System.out.println("Número da conta do DESTINATÁRIO: ");
+        int numeroContaDestinatario = ler.nextInt();
+
+        System.out.println("Valor da transferência: ");
+        Double valor = ler.nextDouble();
+
+        if (opContaDestinatario == 1) {
+            ContaComum contaDestinatario = encontrarContaComum(numeroContaDestinatario);
+            contaRemetente.transferir(contaDestinatario, valor);
+
+        }
+        if (opContaDestinatario == 2){
+            ContaEspecial contaDestinatario = encontrarContaEspecial(numeroContaDestinatario);
+            contaRemetente.transferir(contaDestinatario, valor);
+        }
+        if (opContaDestinatario == 3){
+            ContaPoupanca contaDestinatario = encontrarContaPoupanca(numeroContaDestinatario);
+            contaRemetente.transferir(contaDestinatario, valor);
+        }
+        operacoes();
     }
 
     /* public static void transferir() {

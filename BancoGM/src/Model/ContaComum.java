@@ -10,14 +10,19 @@ public class ContaComum {
     private String dta_abertura;
     private Double saldo = 0.0;
     private Double limite_valor_transacao;
+    private Integer tipo_conta;
+    private String desc_tipoConta;
 
-    public ContaComum(Cliente cliente, String dta_abertura, Double limite_valor_transacao) {
+
+    public ContaComum(Cliente cliente, String dta_abertura, Double limite_valor_transacao, Integer tipo_conta) {
         this.contadorDeConta +=1;
         this.numeroConta = ContaComum.contadorDeConta;
         this.cliente = cliente;
         this.updateSaldo();
         this.dta_abertura = dta_abertura;
         this.limite_valor_transacao = limite_valor_transacao;
+        this.tipo_conta = tipo_conta;
+        this.desc_tipoConta = "CONTA COMUM";
     }
 
     public ContaComum() {
@@ -71,6 +76,22 @@ public class ContaComum {
         this.limite_valor_transacao = limite_valor_transacao;
     }
 
+    public Integer getTipo_conta() {
+        return tipo_conta;
+    }
+
+    public void setTipo_conta(Integer tipo_conta) {
+        this.tipo_conta = tipo_conta;
+    }
+
+    public String getDesc_tipoConta() {
+        return desc_tipoConta;
+    }
+
+    public void setDesc_tipoConta(String desc_tipoConta) {
+        this.desc_tipoConta = desc_tipoConta;
+    }
+
     void updateSaldo() {
         this.saldo = this.getSaldo();
     }
@@ -79,6 +100,7 @@ public class ContaComum {
         return  "\nNúmero da conta: " + this.getNumeroConta() +
                 "\nNome: " + this.cliente.getNome() +
                 "\nCpf: " + this.cliente.getCpf() +
+                "\nTipo de conta: " + this.getDesc_tipoConta() +
                 "\nSaldo: " + Utils.doubleToString(this.getSaldo()) +
                 "\n";
     }
@@ -102,7 +124,7 @@ public class ContaComum {
     }
 
     public void transferir (ContaComum contaParaDeposito, Double valor){
-        if(valor > 0 && this.getSaldo() >= valor){
+        if(valor > 0 && this.getSaldo() >= valor && valor <= this.getLimite_valor_transacao()){
             setSaldo(getSaldo() - valor);
 
             contaParaDeposito.saldo = contaParaDeposito.getSaldo() + valor;
