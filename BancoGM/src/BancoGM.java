@@ -119,7 +119,7 @@ public class BancoGM {
             System.out.println("Conta criada com sucesso!");
             operacoes();
 
-        } if (opConta == 2){
+        } else if (opConta == 2){
             System.out.println("Limite de crédito:");
             Double limiteCredito = ler.nextDouble();
             ContaEspecial contaEspecial = new ContaEspecial(cliente, dta_abertura, limite, limiteCredito, opConta);
@@ -127,7 +127,7 @@ public class BancoGM {
             System.out.println("Conta criada com sucesso!");
             operacoes();
 
-        } if (opConta == 3){
+        } else if (opConta == 3){
             System.out.println("Digite o dia de hoje (0-31):");
             Integer diaHoje = ler.nextInt();
             ContaPoupanca contaPoupanca = new ContaPoupanca(cliente, dta_abertura, limite, diaHoje, opConta);
@@ -135,12 +135,11 @@ public class BancoGM {
             System.out.println("Conta criada com sucesso!");
             operacoes();
 
-        } else {
-            System.out.println("Você selecionou uma opção de conta inválida!");
-            System.out.println("Preencha os dados novamente...");
-            operacoes();
-        }
-
+            } else {
+                System.out.println("Você selecionou uma opção de conta inválida!");
+                System.out.println("Preencha os dados novamente...");
+                operacoes();
+            }
     }
     private static ContaComum encontrarContaComum(int numeroConta) {
         ContaComum contaComum = null;
@@ -188,42 +187,43 @@ public class BancoGM {
         System.out.println("Número da conta: ");
         int numeroConta = ler.nextInt();
 
-        if (opConta == 1){
+        if (opConta == 1) {
             ContaComum contaComum = encontrarContaComum(numeroConta);
 
-            if(contaComum != null) {
+            if (contaComum != null) {
                 System.out.println("Qual valor deseja depositar? ");
                 Double valorDeposito = ler.nextDouble();
 
                 contaComum.depositar(valorDeposito);
-            }else {
+            } else {
                 System.out.println("--- Conta não encontrada ---");
             }
-        }
-        if (opConta == 2){
+        }else if (opConta == 2) {
             ContaEspecial contaEspecial = encontrarContaEspecial(numeroConta);
 
-            if(contaEspecial != null) {
+            if (contaEspecial != null) {
                 System.out.println("Qual valor deseja depositar? ");
                 Double valorDeposito = ler.nextDouble();
 
                 contaEspecial.depositar(valorDeposito);
-            }else {
+            } else {
                 System.out.println("--- Conta não encontrada ---");
             }
-        }
-        if (opConta == 3){
+        } else if (opConta == 3) {
             ContaPoupanca contaPoupanca = encontrarContaPoupanca(numeroConta);
 
-            if(contaPoupanca != null) {
+            if (contaPoupanca != null) {
                 System.out.println("Qual valor deseja depositar? ");
                 Double valorDeposito = ler.nextDouble();
 
                 contaPoupanca.depositar(valorDeposito);
-            }else {
+            } else {
                 System.out.println("--- Conta não encontrada ---");
             }
+        } else {
+            System.out.println("--- Tipo de conta inválida ---");
         }
+
         operacoes();
     }
 
@@ -452,15 +452,18 @@ public class BancoGM {
             for(ContaComum contaComum: contasComum) {
                 System.out.println(contaComum);
             }
-        }if(contasEspeciais.size() > 0) {
+        }
+        if(contasEspeciais.size() > 0) {
             for(ContaEspecial contaEspecial: contasEspeciais) {
                 System.out.println(contaEspecial);
             }
-        }if(contasPoupancas.size() > 0) {
+        }
+        if(contasPoupancas.size() > 0) {
             for(ContaPoupanca contaPoupanca: contasPoupancas) {
                 System.out.println(contaPoupanca);
             }
-        }else {
+        }
+        if (contasComum.size() == 0 && contasEspeciais.size() == 0 && contasPoupancas.size() == 0){
             System.out.println("--- Não há contas cadastradas ---");
         }
 
