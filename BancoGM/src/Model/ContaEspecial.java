@@ -26,6 +26,16 @@ public class ContaEspecial extends ContaComum{
         this.limite_credito = limite_credito;
     }
 
+    public void sacarContaEspecial (Double valor){
+        if(valor > 0 && (this.getSaldo()+this.getLimite_credito()) >= valor){
+            setSaldo(getSaldo() - valor);
+            System.out.println("Saque realizado com sucesso!");
+
+        } else {
+            System.out.println("Não foi possível realizar o saque!");
+        }
+    }
+
     public void transferirContaEspecial (ContaComum contaParaDeposito, Double valor){
         if(valor > 0 && (this.getSaldo()+this.getLimite_credito()) >= valor && valor <= this.getLimite_valor_transacao()){
             setSaldo(getSaldo() - valor);
@@ -37,5 +47,8 @@ public class ContaEspecial extends ContaComum{
             System.out.println("Não foi possível realizar a transferência!");
         }
     }
-    
+
+    public void alterarLimiteCredito(ContaEspecial contaEspecial, Double novoLimite) {
+        contaEspecial.setLimite_credito(novoLimite);
+    }
 }

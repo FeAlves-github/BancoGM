@@ -31,7 +31,9 @@ public class BancoGM {
         System.out.println("|       3. Realizar depósito                   |");
         System.out.println("|       4. Realizar saque                      |");
         System.out.println("|       5. Realizar transferência              |");
-        System.out.println("|       6. Sair                                |");
+        System.out.println("|       6. Alterar limite de transação         |");
+        System.out.println("|       7. Alterar limite de crédito           |");
+        System.out.println("|       8. Sair                                |");
 
         int op = ler.nextInt();
 
@@ -78,6 +80,14 @@ public class BancoGM {
                 break;
             }
             case 6 -> {
+                alterarLimiteTransacao();
+                break;
+            }
+            case 7 -> {
+                alterarLimiteCredito();
+                break;
+            }
+            case 8 -> {
                 System.out.println("Saindo...");
                 System.exit(0);
             }
@@ -250,6 +260,18 @@ public class BancoGM {
             }
 
         }if (opConta == 2){
+            ContaEspecial contaEspecial = encontrarContaEspecial(numeroConta);
+
+            if(contaEspecial != null) {
+                System.out.println("Qual valor deseja sacar? ");
+                Double valorSaque = ler.nextDouble();
+
+                contaEspecial.sacarContaEspecial(valorSaque);
+            }else {
+                System.out.println("--- Conta não encontrada ---");
+            }
+
+        }if (opConta == 3){
             ContaPoupanca contaPoupanca = encontrarContaPoupanca(numeroConta);
 
             if(contaPoupanca != null) {
@@ -257,18 +279,6 @@ public class BancoGM {
                 Double valorSaque = ler.nextDouble();
 
                 contaPoupanca.sacar(valorSaque);
-            }else {
-                System.out.println("--- Conta não encontrada ---");
-            }
-
-        }if (opConta == 3){
-            ContaEspecial contaEspecial = encontrarContaEspecial(numeroConta);
-
-            if(contaEspecial != null) {
-                System.out.println("Qual valor deseja sacar? ");
-                Double valorSaque = ler.nextDouble();
-
-                contaEspecial.sacar(valorSaque);
             }else {
                 System.out.println("--- Conta não encontrada ---");
             }
@@ -295,13 +305,16 @@ public class BancoGM {
             contaRemetente.transferir(contaDestinatario, valor);
 
         }
-        if (opContaDestinatario == 2){
+        else if (opContaDestinatario == 2){
             ContaEspecial contaDestinatario = encontrarContaEspecial(numeroContaDestinatario);
             contaRemetente.transferir(contaDestinatario, valor);
         }
-        if (opContaDestinatario == 3){
+        else if (opContaDestinatario == 3){
             ContaPoupanca contaDestinatario = encontrarContaPoupanca(numeroContaDestinatario);
             contaRemetente.transferir(contaDestinatario, valor);
+        }
+        else {
+        System.out.println("--- Conta não encontrada ---");
         }
         operacoes();
     }
@@ -325,13 +338,16 @@ public class BancoGM {
             contaRemetente.transferirContaEspecial(contaDestinatario, valor);
 
         }
-        if (opContaDestinatario == 2){
+        else if (opContaDestinatario == 2){
             ContaEspecial contaDestinatario = encontrarContaEspecial(numeroContaDestinatario);
             contaRemetente.transferir(contaDestinatario, valor);
         }
-        if (opContaDestinatario == 3){
+        else if (opContaDestinatario == 3){
             ContaPoupanca contaDestinatario = encontrarContaPoupanca(numeroContaDestinatario);
             contaRemetente.transferir(contaDestinatario, valor);
+        }
+        else {
+        System.out.println("--- Conta não encontrada ---");
         }
         operacoes();
     }
@@ -355,97 +371,89 @@ public class BancoGM {
             contaRemetente.transferir(contaDestinatario, valor);
 
         }
-        if (opContaDestinatario == 2){
+        else if (opContaDestinatario == 2){
             ContaEspecial contaDestinatario = encontrarContaEspecial(numeroContaDestinatario);
             contaRemetente.transferir(contaDestinatario, valor);
         }
-        if (opContaDestinatario == 3){
+        else if (opContaDestinatario == 3){
             ContaPoupanca contaDestinatario = encontrarContaPoupanca(numeroContaDestinatario);
             contaRemetente.transferir(contaDestinatario, valor);
+        }
+        else {
+            System.out.println("--- Conta não encontrada ---");
         }
         operacoes();
     }
 
-    /* public static void transferir() {
-        System.out.println("----- Qual o tipo da conta do REMETENTE para a transferência? -----");
+    private static void alterarLimiteCredito() {
+        System.out.println("Número da conta ESPECIAL: ");
+        int numeroConta = ler.nextInt();
+
+        ContaEspecial contaEspecial = encontrarContaEspecial(numeroConta);
+
+        if (contaEspecial != null) {
+            System.out.println("Limite de crédito atual:" + contaEspecial.getLimite_credito());
+            System.out.println("Qual o novo limite de crédito deseja definir? ");
+            Double novoLimite = ler.nextDouble();
+
+            contaEspecial.alterarLimiteCredito(contaEspecial, novoLimite);
+        } else {
+            System.out.println("--- Conta não encontrada ---");
+        }
+        operacoes();
+    }
+
+    private static void alterarLimiteTransacao() {
+        System.out.println("----- Qual o tipo da conta deseja alterar limite de transação? -----");
         System.out.println("1. Conta Comum");
         System.out.println("2. Conta Especial");
         System.out.println("3. Conta Poupança");
-        Integer opContaRemetente = ler.nextInt();
+        Integer opConta = ler.nextInt();
 
-        System.out.println("Número da conta do REMETENTE: ");
-        int numeroContaRemetente = ler.nextInt();
+        System.out.println("Número da conta: ");
+        int numeroConta = ler.nextInt();
 
-        if (opContaRemetente == 1) {
-            ContaComum contaRemetente = encontrarContaComum(numeroContaRemetente);
+        if (opConta == 1) {
+            ContaComum contaComum = encontrarContaComum(numeroConta);
 
-            // oq eu colocaria:
-            // if(contaComum == null){
-            //System.out.println("--- Conta não encontrada ---");
-            //}
-            //if(contaComum != null) {
+            if (contaComum != null) {
+                System.out.println("Limite de crédito atual:" + contaComum.getLimite_valor_transacao());
+                System.out.println("Qual o novo limite de transação deseja definir? ");
+                Double novoLimite = ler.nextDouble();
 
-            //}else {
-                //System.out.println("--- Conta não encontrada ---");
-            //}
-        }
-        if (opContaRemetente == 2){
-            ContaPoupanca contaRemetente = encontrarContaPoupanca(numeroContaRemetente);
-
-            //if(contaPoupanca != null) {
-
-           // }else {
-               // System.out.println("--- Conta não encontrada ---");
-            //}
-        }
-        if (opContaRemetente == 3){
-            ContaEspecial contaRemetente = encontrarContaEspecial(numeroContaRemetente);
-
-           // if(contaEspecial != null) {
-
-            //}else {
-                //System.out.println("--- Conta não encontrada ---");
-            //}
-       }
-
-        if(contaRemetente != null) {
-            System.out.println("----- Qual o tipo da conta do DESTINATÁRIO para a transferência? -----");
-            System.out.println("1. Conta Comum");
-            System.out.println("2. Conta Especial");
-            System.out.println("3. Conta Poupança");
-            Integer opContaDestinatario = ler.nextInt();
-
-            System.out.println("Número da conta do DESTINATÁRIO: ");
-            int numeroContaDestinatario = ler.nextInt();
-
-            //Conta contaDestinatario = encontrarConta(numeroContaDestinatario);
-
-            if (opContaRemetente == 1) {
-                ContaComum contaDestinatario = encontrarContaComum(numeroContaDestinatario);
-
-            } if (opContaRemetente == 2) {
-                ContaEspecial contaDestinatario = encontrarContaEspecial(numeroContaDestinatario);
-
-            } if (opContaRemetente == 3) {
-                ContaPoupanca contaDestinatario = encontrarContaPoupanca(numeroContaDestinatario);
-
+                contaComum.alterarLimiteTransacao(contaComum, novoLimite);
+            } else {
+                System.out.println("--- Conta não encontrada ---");
             }
+        }else if (opConta == 2) {
+            ContaEspecial contaEspecial = encontrarContaEspecial(numeroConta);
 
-            if(contaDestinatario != null) {
-                System.out.println("Valor da transferência: ");
-                Double valor = ler.nextDouble();
+            if (contaEspecial != null) {
+                System.out.println("Limite de crédito atual:" + contaEspecial.getLimite_valor_transacao());
+                System.out.println("Qual o novo limite de transação deseja definir? ");
+                Double novoLimite = ler.nextDouble();
 
-                contaRemetente.transferencia(contaDestinatario, valor);
-
-            }else {
-                System.out.println("--- A conta para depósito não foi encontrada ---");
+                contaEspecial.alterarLimiteTransacao(contaEspecial, novoLimite);
+            } else {
+                System.out.println("--- Conta não encontrada ---");
             }
+        } else if (opConta == 3) {
+            ContaPoupanca contaPoupanca = encontrarContaPoupanca(numeroConta);
 
-        }else {
-            System.out.println("--- Conta para transferência não encontrada ---");
+            if (contaPoupanca != null) {
+                System.out.println("Limite de crédito atual:" + contaPoupanca.getLimite_valor_transacao());
+                System.out.println("Qual o novo limite de transação deseja definir? ");
+                Double novoLimite = ler.nextDouble();
+
+                contaPoupanca.alterarLimiteTransacao(contaPoupanca, novoLimite);
+            } else {
+                System.out.println("--- Conta não encontrada ---");
+            }
+        } else {
+            System.out.println("--- Tipo de conta inválida ---");
         }
         operacoes();
-    }*/
+    }
 
     public static void listarContas() {
         if(contasComum.size() > 0) {

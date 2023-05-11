@@ -135,4 +135,7 @@ public class ContaComum {
         }
     }
 
+    public void alterarLimiteTransacao(ContaComum contaComum, Double novoLimite) {
+        contaComum.setLimite_valor_transacao(novoLimite);
+    }
 }
